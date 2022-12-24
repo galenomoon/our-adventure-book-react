@@ -7,7 +7,7 @@ import Button from '../../components/Button';
 
 import { years } from '../../mock/years';
 
-export default function Home() {
+export default function Home({ navigation }) {
   const [year, setYear] = useState(new Date().getFullYear());
   const banner = years.find(item => item.year === year)?.banner
   return (
@@ -17,8 +17,8 @@ export default function Home() {
           <Image style={tw`w-[350px] h-[350px] rounded-2xl mb-[32px]`} source={{ uri: banner }} />
           :
           <View style={tw`w-[350px] h-[350px] flex items-center justify-center rounded-2xl mb-[32px] bg-[#CDC2A777]`} >
-            <Text className='text-[64px] text-[#CDC2A7] ' bold>
-              EM BREVE...
+            <Text className='text-[64px] text-[#CDC2A7] text-center ' bold>
+              {new Date().getFullYear() === year ? "NOVA TEMPORADA SENDO ESCRITA..." : "EM BREVE..."}
             </Text>
           </View>
         }
@@ -42,7 +42,7 @@ export default function Home() {
           </TouchableOpacity>
         </View>
         <View>
-          <Button style={tw`my-1`}>
+          <Button onPress={() => navigation.navigate("Album")} style={tw`my-1`}>
             VER ÁLBUM
           </Button>
           <Button style={tw`my-1`}>
@@ -58,7 +58,7 @@ export default function Home() {
           </Text>
           <View style={tw`w-[100px] h-[2px] bg-[#CDC2A777]`} />
         </View>
-        <Button style={tw`my-1`}>
+        <Button onPress={() => navigation.navigate("NewPhoto", {year})} style={tw`my-1`}>
           NOVA FOTO
         </Button>
       </View>

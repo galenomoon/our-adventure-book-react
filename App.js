@@ -11,6 +11,8 @@ const Stack = createStackNavigator();
 //pages
 import Home from './src/pages/Home';
 import Auth from './src/pages/Auth';
+import Album from './src/pages/Album';
+import NewPhoto from './src/pages/NewPhoto';
 
 export default function App() {
 
@@ -20,6 +22,8 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen options={{ headerShown: false }} name="Auth" component={Auth} />
         <Stack.Screen options={{ headerShown: false }} name="Home" component={Home} />
+        <Stack.Screen options={{ headerShown: false }} name="Album" component={Album} />
+        <Stack.Screen options={{ headerShown: false }} name="NewPhoto" component={NewPhoto} />
       </Stack.Navigator>
     </NavigationContainer>
   );

@@ -8,7 +8,7 @@ import AppLoading from 'expo-app-loading';
 //styles
 import tw from 'twrnc';
 
-export default function Input({ onChangeText, value, secureTextEntry, keyboardType }) {
+export default function Input({ onChangeText, value, secureTextEntry, keyboardType, className }) {
   const [loaded] = useFonts({
     'AmaticSC-Bold': require('../../../assets/fonts/AmaticSC-Bold.ttf'),
   });
@@ -16,7 +16,7 @@ export default function Input({ onChangeText, value, secureTextEntry, keyboardTy
   return (!loaded ? <AppLoading /> :
     <View>
       <TextInput
-        style={[tw`w-[300px] bg-[#CDC2A7] py-3 border-t border-l border-[6px] flex items-center justify-center rounded-[22px] text-[#291E1A] text-white text-4xl`, { color: '#291E1A' }, { fontFamily: 'AmaticSC-Bold' }]}
+        style={[tw`${className || "max-w-[90%] w-[90%] min-w-[300px] bg-[#CDC2A7] text-[#291E1A] rounded-[22px] px-10 border-t border-l py-3 border-[6px] text-4xl"}  flex items-center justify-center `, className || { color: '#291E1A' }, { fontFamily: 'AmaticSC-Bold' }]}
         value={value}
         keyboardType={keyboardType}
         textAlign={'center'}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { View, TextInput, Image, Keyboard } from 'react-native';
+import { View, Alert, Image, Keyboard } from 'react-native';
 import { Text } from '../../components/StyledText';
 
 import tw from 'twrnc';
@@ -22,6 +22,11 @@ export default function Auth({ navigation }) {
   React.useEffect(() => {
     if (password === '210821') {
       navigation.navigate('Home')
+      return
+    }
+    if (password.length === 6) {
+      Alert.alert('Senha incorreta', 'Tente novamente')
+      setPassword('')
     }
   }, [password])
 
@@ -33,7 +38,7 @@ export default function Auth({ navigation }) {
         <Input
           keyboardType='numeric'
           value={password}
-          onChangeText={text => setPassword(text)}
+          onChangeText={text => password.length <= 6 ? setPassword(text) : setPassword('')}
           secureTextEntry
         />
       </View>
