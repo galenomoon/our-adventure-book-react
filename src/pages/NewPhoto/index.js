@@ -13,13 +13,12 @@ import { Text } from '../../components/StyledText';
 //styles
 import tw from 'twrnc';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
-export default function NewPhoto({ route, navigation }) {
+export default function NewPhoto({ route }) {
   const { year } = route.params;
   const cameraRef = useRef(null)
   const [hasPermission, setHasPermission] = useState(null);
-  const [type, setType] = useState(CameraType.back);
+  const [type, setType] = useState(CameraType.front);
   const [subtitle, setSubtitle] = useState('*CLIQUE PARA ADICIONAR LEGENDA*');
   const [capturedPhoto, setCapturedPhoto] = useState(null)
   const [image, setImageSelected] = useState(null);
@@ -39,13 +38,7 @@ export default function NewPhoto({ route, navigation }) {
   }
 
   async function getImageFromGalery() {
-    let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
-      allowsEditing: true,
-      aspect: [4, 3],
-      quality: 1,
-    });
-
+    let result = await ImagePicker.launchImageLibraryAsync({ mediaTypes: ImagePicker.MediaTypeOptions.All, allowsEditing: true, aspect: [4, 3], quality: 1 });
     if (!result.canceled) {
       setImageSelected(result.uri);
     }
@@ -56,16 +49,12 @@ export default function NewPhoto({ route, navigation }) {
       "Deseja remover a foto?",
       "A foto será removida e não poderá ser recuperada.",
       [
-        {
-          text: "Cancel",
-          onPress: () => { },
-          style: "cancel"
-        },
+        { text: "Cancel", onPress: () => { }, style: "cancel" },
         { text: "OK", onPress: () => [setImageSelected(null), setCapturedPhoto(null)] }
       ]
     );
 
-  const takePicture = async () => {
+  async function takePicture() {
     if (cameraRef) {
       let data = await cameraRef.current.takePictureAsync()
       setCapturedPhoto(data?.uri)
@@ -75,12 +64,9 @@ export default function NewPhoto({ route, navigation }) {
   return (
     <View style={tw`flex flex-col flex-1 items-center justify-center relative bg-[#291E1A]`}>
       <View style={tw`flex flex-row w-full justify-center items-center absolute top-15`}>
-        <TouchableOpacity style={tw`absolute left-7`}  onPress={() => navigation.navigate('Home')}>
-          <MaterialIcons name='arrow-back' color={"#fff"} size={35} />
-        </TouchableOpacity>
         <Text className="text-5xl text-white self-center" bold>{year}</Text>
-        <View />
       </View>
+        <View style={tw`w-[80%] h-[3px] bg-[#ffffff33] absolute top-29`} />
       <View style={tw`flex flex-col w-[95%] h-[95%] rounded-md  items-center justify-center py-[32px] border-[2px]  border-dashed  border-[#F5EEE855]`}>
         <Text className="text-3xl text-white mb-3" bold>{moment().format('DD/MM/YYYY')}</Text>
         <View style={tw`flex flex-col px-[15px] pt-[15px] pb-[80px] rounded-md bg-white`}>

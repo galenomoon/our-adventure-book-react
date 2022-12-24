@@ -42,7 +42,7 @@ export default function Home({ navigation }) {
           </TouchableOpacity>
         </View>
         <View>
-          <Button onPress={() => navigation.navigate("Album")} style={tw`my-1`}>
+          <Button onPress={() => navigation.navigate("Album", { year })} style={tw`my-1`}>
             VER ÁLBUM
           </Button>
           <Button style={tw`my-1`}>
@@ -58,7 +58,7 @@ export default function Home({ navigation }) {
           </Text>
           <View style={tw`w-[100px] h-[2px] bg-[#CDC2A777]`} />
         </View>
-        <Button onPress={() => navigation.navigate("NewPhoto", {year})} style={tw`my-1`}>
+        <Button onPress={() => navigation.navigate("NewPhoto", { year })} style={tw`my-1`}>
           NOVA FOTO
         </Button>
       </View>
